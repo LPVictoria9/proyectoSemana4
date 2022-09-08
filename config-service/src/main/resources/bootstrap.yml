@@ -1,0 +1,18 @@
+server:
+  port: 8888
+spring:
+  application:
+    name: configServer
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/LPVictoria9/proyectoSemana3.git
+          #default-label: future_victoriaGateway
+          search-paths: config-data
+          username:  {GET_USER}
+          password:  {GET_PWS}
+  security:
+    user:
+      name: root
+      password: s3cr3t
