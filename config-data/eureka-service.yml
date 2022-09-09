@@ -2,7 +2,7 @@ server:
   port: 8761
 eureka:
   instance:
-    hostname: appcloud
+    hostname: localhost
   client:
     registerWithEureka: false
     fetchRegistry: false
