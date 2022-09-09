@@ -1,0 +1,25 @@
+version: '3.7'
+services:
+  config-server:
+    image: /config-service:v1
+    container_name: config-server-1
+    ports:
+      - "8888:8888"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    networks:
+      - backend
+  eureka-server:
+    image: /eureka-service:v1
+    container_name: eureka-server-1
+    ports:
+      - "8761:8761"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - config-server
+    networks:
+      - backend
+networks:
+  backend:
+

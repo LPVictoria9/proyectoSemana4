@@ -1,0 +1,31 @@
+version: '3.7'
+services:
+  config-server:
+    image: config-service:v1
+    ports:
+      - "8888:8888"
+    restart: always
+    networks:
+      backend:
+        aliases:
+          - "config-server"
+  eureka-server:
+    image: eureka-service:v1
+    environment:
+      PROFILE: "default"
+      CONFIGSERVER_URI: "http://config-server:8888"
+      CONFIGSERVER_PORT: "8888"
+    depends_on:
+      config-server:
+        condition: service_started
+    ports:
+      - "8761:8761"
+    restart: always
+    networks:
+      backend:
+        aliases:
+          - "config-server"
+networks:
+  backend:
+    driver: bridge
+
